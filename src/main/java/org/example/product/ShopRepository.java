@@ -32,45 +32,47 @@ public class ShopRepository {
         }
         products = addToArray(products, product); //вызываем метод addToArray и присваиваем результат переменной products
     }
-        public Product[] findAll() { //метод для получения всех товаров из репозитория
-            return products; //возвращаем массив товаров
-        }
-        public void remove ( int id){
-            Product[] tmp = new Product[products.length - 1];
-            int copyToIndex = 0;
-            for (Product product : products) {
-                if (product.getId() != id) {
-                    tmp[copyToIndex] = product;
-                    copyToIndex++;
-                }
-            }
-            products = tmp;
-        }
 
-        public Product findById (int id){ //метод поиска товра по идентификатору
-            for (Product product : products) {//перебираем все товары в массиве
-                if (product.getId() == id) { //если нашли товар с нужным идентификатором
-                    //throw new NotFoundException("ID не найден: "+ id);
-                    return product; //возвращаем этот товар
-                }
-            }
-            return null;//если не нашли товар с нужным идентификатором возврашаем null
-        }
-
-        public void removeById ( int id){ //проверяем метод для удаления товаров по идентификатору
-            Product productToRemove = findById(id); //ищем товар по идентификатору
-            if (productToRemove == null) { //если товар не найден
-                throw new NotFoundException(
-                        "Element with id: " + id + " not found"); //выбрасываем исключение
-            }
-            Product[] tmp = new Product[products.length - 1];//оздаем новый массив на 1 элекмент меньше
-            int copyToIndex = 0;//индекс для копирования элементов из старого в новый
-            for (Product product : products) { //перебираем все товары в массиве
-                if (product.getId() != id) {//если это не товар который нужно удалить
-                    tmp[copyToIndex] = product; //копируем его в новый массив
-                    copyToIndex++; //увеличиваем индекс для копирования
-                }
-            }
-            products = tmp; //присваиваем переменной products новый массив
-        }
+    public Product[] findAll() { //метод для получения всех товаров из репозитория
+        return products; //возвращаем массив товаров
     }
+
+    public void remove(int id) {
+        Product[] tmp = new Product[products.length - 1];
+        int copyToIndex = 0;
+        for (Product product : products) {
+            if (product.getId() != id) {
+                tmp[copyToIndex] = product;
+                copyToIndex++;
+            }
+        }
+        products = tmp;
+    }
+
+    public Product findById(int id) { //метод поиска товра по идентификатору
+        for (Product product : products) {//перебираем все товары в массиве
+            if (product.getId() == id) { //если нашли товар с нужным идентификатором
+                //throw new NotFoundException("ID не найден: "+ id);
+                return product; //возвращаем этот товар
+            }
+        }
+        return null;//если не нашли товар с нужным идентификатором возврашаем null
+    }
+
+    public void removeById(int id) { //проверяем метод для удаления товаров по идентификатору
+        Product productToRemove = findById(id); //ищем товар по идентификатору
+        if (productToRemove == null) { //если товар не найден
+            throw new NotFoundException(
+                    "Element with id: " + id + " not found"); //выбрасываем исключение
+        }
+        Product[] tmp = new Product[products.length - 1];//оздаем новый массив на 1 элекмент меньше
+        int copyToIndex = 0;//индекс для копирования элементов из старого в новый
+        for (Product product : products) { //перебираем все товары в массиве
+            if (product.getId() != id) {//если это не товар который нужно удалить
+                tmp[copyToIndex] = product; //копируем его в новый массив
+                copyToIndex++; //увеличиваем индекс для копирования
+            }
+        }
+        products = tmp; //присваиваем переменной products новый массив
+    }
+}
